@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heidi Health - AI Scribe Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .company-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-section h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 5px;
+        }
+
+        .info-section p, .info-section ul {
+            margin-bottom: 10px;
+        }
+
+        .info-section ul {
+            padding-left: 20px;
+        }
+
+        .info-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: rgba(255, 165, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #ffa500;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .nav-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .nav-button.primary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        .nav-button.special {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .company-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Heidi Health</h1>
+            <p>AI-Powered Medical Documentation & Practice Management</p>
+        </div>
+
+        <div class="content">
+            <div class="company-info">
+                <div class="info-section">
+                    <h3>Company Overview</h3>
+                    <p><strong>Contact:</strong> Damian Attia</p>
+                    <p><strong>Role:</strong> Business Development Manager</p>
+                    <p><strong>Email:</strong> Damian@heidihealth.com</p>
+                    <p><strong>Specialization:</strong> AI-powered medical documentation and practice management</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Privacy & Compliance</h3>
+                    <p><strong>Australian Privacy Principles:</strong> <span class="warning">Not Sure</span></p>
+                    <p><strong>Data Storage:</strong> Australian AWS servers</p>
+                    <p><strong>Security:</strong> <span class="highlight">SOC2 and ISO27001 certified</span></p>
+                    <p><strong>Regulation:</strong> Multiple countries</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Trial & Pricing</h3>
+                    <p><strong>Free Level:</strong> <span class="highlight">Yes - Free tier available</span></p>
+                    <p><strong>Free Trial:</strong> <span class="highlight">Yes</span></p>
+                    <p><strong>Trial Duration:</strong></p>
+                    <ul>
+                        <li>Pro tier: 7 days</li>
+                        <li>Together tier: 30 days</li>
+                        <li>Enterprise tier: varies</li>
+                    </ul>
+                    <p><strong>Pricing Range:</strong> Free tier to $1299 per user/year</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Core Features</h3>
+                    <ul>
+                        <li><strong>Transcription</strong> - Real-time medical transcription</li>
+                        <li><strong>Document/note generation</strong> - Automated clinical notes</li>
+                        <li><strong>Custom templates</strong> - Personalized documentation</li>
+                        <li><strong>Ask AI</strong> - AI-powered medical assistance</li>
+                        <li><strong>PMS integrations</strong> - Practice management connectivity</li>
+                        <li><strong>Team infrastructure</strong> - Multi-user support</li>
+                        <li><strong>Telehealth support</strong> - Remote consultation tools</li>
+                        <li><strong>Heidi Health App</strong> - Mobile accessibility</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Unique Features</h3>
+                    <ul>
+                        <li><strong>Medical language training</strong> - AI trained by clinicians</li>
+                        <li><strong>Enterprise security</strong> - SOC2 and ISO27001 compliance</li>
+                        <li><strong>Global regulation</strong> - Compliant in multiple countries</li>
+                        <li><strong>Dedicated tools</strong> - Seamless use cases</li>
+                        <li><strong>Multi-language support</strong> - Cantonese, French, German, Mandarin, Spanish, and more</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Technical Specifications</h3>
+                    <p><strong>Headphones Support:</strong> ✓ Yes</p>
+                    <p><strong>Phone Support:</strong> ✓ Yes</p>
+                    <p><strong>Telehealth Integration:</strong> ✓ Yes</p>
+                    <p><strong>Multi-note Reports:</strong> ✓ Yes</p>
+                    <p><strong>AI Training:</strong> ✓ Via user-created templates</p>
+                    <p><strong>Content Preferences:</strong> ✓ Customizable generation</p>
+                    <p><strong>Quality Sources:</strong> ✓ Evidence-based restrictions</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Practice Management Integration</h3>
+                    <p><strong>PMS Support:</strong> ✓ Yes</p>
+                    <p><strong>Current Integrations:</strong></p>
+                    <ul>
+                        <li>Cliniko</li>
+                        <li>Best Practice</li>
+                        <li>Medirecords</li>
+                        <li>More integrations upcoming</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>User Experience & Sustainability</h3>
+                    <p><strong>User Interface:</strong> Intuitive UI with dedicated engineering support</p>
+                    <p><strong>Mobile Support:</strong> Available on all mobile platforms</p>
+                    <p><strong>Eco-Friendly:</strong> Remote work options, upcoming ESG report</p>
+                    <p><strong>Team Support:</strong> Dedicated engineering team</p>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="index.html" class="nav-button primary">Back to Comparison</a>
+                <a href="https://bit.ly/psheaffiliate" class="nav-button special">30 Days Free Trial</a>
+                <a href="mailto:Damian@heidihealth.com" class="nav-button">Contact Heidi Health</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

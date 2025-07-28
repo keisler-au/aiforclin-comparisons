@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovoPsych (NovoNote) - AI Mental Health Scribe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-button.secondary {
+            background: #764ba2;
+        }
+
+        .nav-button.secondary:hover {
+            background: #6a4190;
+        }
+
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .info-card p, .info-card ul {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .info-card ul {
+            padding-left: 20px;
+        }
+
+        .info-card li {
+            margin-bottom: 8px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .features {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-yes {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-no {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            border-color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .info-grid, .pricing-grid, .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NovoPsych</h1>
+            <p>AI-Powered Mental Health Scribe & Psychometrics</p>
+            
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button">← Back to Comparison</a>
+                <a href="https://novopsych.com.au" class="nav-button secondary">Visit NovoPsych Website</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Company Overview</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Leadership</h3>
+                        <p><strong>CEO:</strong> Ben Buchanan</p>
+                        <p><strong>Product:</strong> NovoNote by NovoPsych</p>
+                        <p><strong>Specialization:</strong> Mental health practitioners</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Privacy & Compliance</h3>
+                        <p>✅ Complies with Australian Privacy Principles</p>
+                        <p>✅ Data stored in Australia</p>
+                        <p>✅ Designed specifically for mental health</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Trial & Access</h3>
+                        <p><strong>Free Trial:</strong> 3 months</p>
+                        <p><strong>Free Tier:</strong> 30 notes per month</p>
+                        <p><strong>Special Offer:</strong> Free until March 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Core Features</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h4>In-Session Transcription</h4>
+                        <p>Real-time transcription during therapy sessions with mental health-specific accuracy</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Document & Note Generation</h4>
+                        <p>Automated generation of clinical notes and documentation</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Mental Health Templates</h4>
+                        <p>Template library designed by team of psychologists for various therapy contexts</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Custom Templates</h4>
+                        <p>Create and customize templates to match your specific practice needs</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>NovoPsych Integration</h4>
+                        <p>Seamless integration with NovoPsych Psychometrics for enhanced context</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Multi-Platform Support</h4>
+                        <p>Works on computers, phones, and tablets for maximum flexibility</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Unique Value Proposition</h2>
+                <div class="info-card">
+                    <h3>Mental Health Specialization</h3>
+                    <p>NovoNote is specifically designed for mental health practitioners by the NovoPsych team. The integration with NovoPsych Psychometrics allows the AI to use objective and structured psychometric data to create extra context for note and document generation, drastically improving note quality.</p>
+                </div>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h4>Multi-Session Reports <span class="status-badge status-partial">Coming Jan 2025</span></h4>
+                        <p>Generate comprehensive reports across multiple therapy sessions</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Psychometric Integration <span class="status-badge status-partial">Coming Jan 2025</span></h4>
+                        <p>Integration of psychometric test results for enhanced clinical context</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Practice Plans</h4>
+                        <p>Team-based features for group practices and clinics</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Technical Specifications</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Compatibility</h3>
+                        <p>✅ Works with Telehealth</p>
+                        <p>✅ Multi-platform (computers, phones, tablets)</p>
+                        <p>❓ Works with headphones (Not confirmed)</p>
+                        <p>❌ Does not work over the phone</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Integration</h3>
+                        <p>Copy/paste into practice management software</p>
+                        <p>Native integration with NovoPsych Psychometrics</p>
+                        <p>Primarily English language support</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>AI Capabilities</h3>
+                        <p>✅ AI trainable over time</p>
+                        <p>✅ Reinforcement learning from feedback</p>
+                        <p>✅ Evidence-based source restrictions</p>
+                        <p>✅ Multi-session report capability</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Pricing & Plans</h2>
+                <p><strong>All plans include access to both NovoNote AI Scribe and NovoPsych Psychometrics</strong></p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h4>Free Tier</h4>
+                        <div class="price">$0/month</div>
+                        <div class="features">30 notes per month</div>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Pro</h4>
+                        <div class="price">$25/month</div>
+                        <div class="features">50 notes per month<br>($300/year)</div>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Pro Plus</h4>
+                        <div class="price">$60/month</div>
+                        <div class="features">100 notes per month</div>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Platinum</h4>
+                        <div class="price">$99/month</div>
+                        <div class="features">Unlimited usage</div>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Practice Plans</h4>
+                        <div class="price">From $50/month</div>
+                        <div class="features">Per clinician<br>Team features</div>
+                    </div>
+                </div>
+                
+                <div class="info-card" style="margin-top: 20px; background: #e8f5e8; border-left-color: #28a745;">
+                    <h3 style="color: #28a745;">🎉 Special Offer</h3>
+                    <p style="color: #155724;"><strong>NovoNote AI Scribe is totally free until March 2025!</strong> Perfect opportunity to test all features without any cost.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>User Experience</h2>
+                <div class="info-card">
+                    <h3>Designed for Busy Practitioners</h3>
+                    <p>NovoNote is built with simplicity in mind, making it easy to use for busy mental health practitioners. The interface is intuitive and requires minimal training to get started.</p>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>CEO:</strong> Ben Buchanan</p>
+                <p><strong>Email:</strong> <a href="mailto:ben@novopsych.com">ben@novopsych.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:0421796325">0421 796 325</a></p>
+                <p><strong>Website:</strong> <a href="https://novopsych.com.au">novopsych.com.au</a></p>
+                <p><strong>Pricing Details:</strong> <a href="https://novopsych.com.au/pricing/">novopsych.com.au/pricing</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
