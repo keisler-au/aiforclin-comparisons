@@ -119,22 +119,13 @@
             max-width: var(--max-width);
         }
 
-        /* Table container */
-        .table-container {
-            background: var(--white);
-            border-radius: var(--border-radius-large);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-heavy);
-            margin-bottom: var(--spacing-lg);
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
         .table-iframe {
             width: 100%;
-            height: 1200px;
+            max-height: 80vh;
             border: none;
             border-radius: var(--border-radius);
             overflow: hidden;
+            margin-bottom: var(--spacing-lg);
         }
 
         /* Company links section */
@@ -258,16 +249,14 @@
                 padding: var(--spacing-sm);
             }
             
-            .company-links,
-            .table-container {
+            .company-links {
                 padding: var(--spacing-md);
                 border-radius: var(--border-radius);
             }
         }
 
         @media (max-width: 480px) {
-            .company-links,
-            .table-container {
+            .company-links {
                 padding: var(--spacing-sm);
                 border-radius: var(--spacing-xs);
             }
@@ -312,7 +301,7 @@
         </header>
         
         <main id="main-content" class="main-content">
-            <section class="table-container" aria-labelledby="comparison-table">
+
                 <h2 id="comparison-table" class="sr-only">Comparison Table</h2>
                 <iframe 
                     src="table.html" 
@@ -323,7 +312,7 @@
                     aria-describedby="table-description">
                 </iframe>
                 <p id="table-description" class="sr-only">Interactive comparison table showing features, pricing, and trial information for various AI scribe companies.</p>
-            </section>
+
             
             <section class="company-links" aria-labelledby="company-details">
                 <h2 id="company-details">AI Scribe Company Details</h2>

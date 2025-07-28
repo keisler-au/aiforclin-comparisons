@@ -18,80 +18,6 @@
             line-height: 1.6;
         }
 
-        .widget-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-
-        .tab-header {
-            display: flex;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-bottom: 2px solid #e2e8f0;
-            padding: 0 8px;
-        }
-
-        .tab-button {
-            padding: 18px 28px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            color: #64748b;
-            border-radius: 10px 10px 0 0;
-            margin: 8px 4px 0 4px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .tab-button:hover {
-            background-color: rgba(15, 118, 110, 0.1);
-            color: #0f766e;
-        }
-
-        .tab-button.active {
-            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #cbd5e1 #f1f5f9;
-        }
-
-        .table-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .table-wrapper::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        .table-wrapper::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-
-        .comparison-table {
-            width: 100%;
-            min-width: 1200px;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
 
         .comparison-table th {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -150,6 +76,57 @@
 
         .comparison-table td:last-child {
             border-right: none;
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(15, 118, 110, 0.3);
+            z-index: 25;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-button:hover {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 24px rgba(15, 118, 110, 0.4);
+        }
+
+        .scroll-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .scroll-button.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: #64748b;
+        }
+
+        .scroll-button.disabled:hover {
+            transform: translateY(-50%);
+            background: #64748b;
+            box-shadow: 0 4px 16px rgba(100, 116, 139, 0.2);
+        }
+
+        .scroll-left {
+            left: 12px;
+        }
+
+        .scroll-right {
+            right: 12px;
         }
 
         .see-more-btn {
@@ -358,16 +335,7 @@
     </style>
 </head>
 <body>
-    <div class="widget-container">
-        <div class="tab-header">
-            <button class="tab-button active" onclick="switchTab('table1')">Table 1</button>
-            <button class="tab-button" onclick="switchTab('table2')">Table 2</button>
-            <button class="tab-button" onclick="switchTab('table3')">Table 3</button>
-        </div>
-
-        <div id="table1" class="tab-content active">
-            <div class="table-wrapper">
-                <table id="tableT" class="comparison-table">
+                <table id="tableId" class="comparison-table">
                     <thead>
                         <tr>
                             <th></th>
@@ -376,682 +344,72 @@
                             <th>Patient Notes</th>
                             <th>Heidi Health</th>
                             <th>Lyrebird</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"> </td>
-                        <td>
-                            <a href="https://www.antsa.com.au/" target="_blank" class="see-more-btn">See more</a>
-                        </td>
-                        <td>
-                            <a href="https://buy.stripe.com/eVa8yH6Akcs35I48wQ" target="_blank" class="see-more-btn">30 day free trial</button>
-                          
-                        </td>
-                        <td>
-                            <a href="https://www.patientnotes.app/" target="_blank" class="see-more-btn">10% Discount</a><br><br><div><b>Code:</b> AIPSYCH2024</div>
-                            <br>
-                        </td>
-                        <td>
-                            <a href="https://scribe.heidihealth.com/?via=psychologysquared" target="_blank" class="see-more-btn">30 day free trial</a>
-                            <br>
-                        </td>
-                        <td>
-                            <a href="https://www.lyrebirdhealth.com/us?via=024cf1" target="_blank" class="see-more-btn">10% Discount</a><br><br><div><b>Code:</b> PS10</div>
-                            <br>
-                        </td>
-                      </tr>
-
-                      <!-- 1. APP Compliance -->
-                      <tr>
-                          <th scope="row">
-                              <div class="tooltip">
-                                  APP Compliance<span class="question-mark">?</span>
-                                  <span class="tooltiptext">Australian Privacy Principles</span>
-                              </div>
-                          </th>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 2. Where is the data stored? -->
-                      <tr>
-                          <th scope="row">Where is data stored?</th>
-                          <td>Australia</td>
-                          <td>Australia</td>
-                          <td>Australia</td>
-                          <td>Australian AWS servers</td>
-                          <td>Australia</td>
-                      </tr>
-                  
-                      <!-- 3. Free Membership Option -->
-                      <tr>
-                          <th scope="row">Free membership option?</th>
-                          <td><span class="cross-icon">✗</span></td>
-                          <td><span class="cross-icon">✗</span></td>
-                          <td><span class="cross-icon">✗</span></td>
-                          <td>
-                              <div class="tooltip">
-                                  <span class="question-mark">!</span>
-                                  <span class="tooltiptext">Heidi offer unlimited usage without being limited by the number of actions</span>
-                                  <span class="check-icon">✓</span>
-                              </div>
-                          </td>
-                          <td><span class="cross-icon">✗</span></td>
-                      </tr>
-                  
-                      <!-- 4. Free Trial Option -->
-                      <tr>
-                          <th scope="row">Is there a free trial?</th>
-                          <td><span class="check-icon">✓</span><br><span>30 days</span></td>
-                          <td><span class="check-icon">✓</span><br><span>30 days</span></td>
-                          <td><span class="check-icon">✓</span><br><span>14 days</span></td>
-                          <td><span class="check-icon">✓</span><br><span>30 days</span></td>
-                          <td><span class="check-icon">✓</span><br><span>14 days</span></td>
-                      </tr>
-                  
-                      <!-- 5. PMS Integration -->
-                      <tr>
-                          <th scope="row">
-                              <div class="tooltip">
-                                  PMS Integration <span class="question-mark">?</span>
-                                  <span class="tooltiptext">Practice Management System</span>
-                              </div>
-                          </th>
-                          <td>AI scribe exportable to PMS (coming January 2025)</td>
-                          <td>Copy+Paste typical, if needed</td>
-                          <td>Cliniko and Nookal</td>
-                          <td>Yes, Cliniko, Best Practice, Medirecords and many to come</td>
-                          <td>Best Practice (available) & Genie / Gentu (coming very soon)</td>
-                      </tr>
-                  
-                      <!-- 6. Unique Features -->
-                      <tr>
-                        <th scope="row">Unique features<br><button class="expand-btn" onclick="toggleExpansion(this)">Show more ↓</button></th>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">AI Scribe Integration</div>
-                                    <ul>
-                                        <li>AI scribe (converts voice to text) and will be exportable to PMS (coming January 2025)</li>
-                                    </ul>
-                                </div>
-                                <div class="section-divider"></div>
-                                <div class="feature-section">
-                                    <div class="feature-category">24/7 AI Therapy</div>
-                                    <ul>
-                                        <li>jAlmee (AI therapy chatbot - extremely popular with clients) is available 24/7. Clinicians can observe jAlmee live or during the</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">Advanced Transcription</div>
-                                    <ul>
-                                        <li>Transcription service with speaker recognition included</li>
-                                    </ul>
-                                </div>
-                                <div class="section-divider"></div>
-                                <div class="feature-section">
-                                    <div class="feature-category">Specialized Healthcare AI</div>
-                                    <ul>
-                                        <li>AI models customized for over 200 healthcare and mental health use cases. Increased use of evidence-based output relative to</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">Advanced Tools</div>
-                                    <ul>
-                                        <li>Smart dictate</li>
-                                        <li>Multi session reports</li>
-                                        <li>Speech-to-text editing</li>
-                                        <li>Prompt creation tool</li>
-                                        <li>Extensive prompt library</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">Security & Compliance</div>
-                                    <ul>
-                                        <li>Highest level of security (SOC2 and ISO27001)</li>
-                                        <li>Fully regulated in multiple countries</li>
-                                    </ul>
-                                </div>
-                                <div class="section-divider"></div>
-                                <div class="feature-section">
-                                    <div class="feature-category">Medical Specialization</div>
-                                    <ul>
-                                        <li>AI is trained on medical language and built by clinicians, making transcription unmatched</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">Customization</div>
-                                    <ul>
-                                        <li>Deep levels of customisation, Lyrebird is the only scribe that allows you upload an example of your ideal report for it to learn how you would like Lyrebird to write (NB Heidi Health they offer this feature but). This means you won't sound</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                      </tr>
-                  
-                      <!-- 7. Core Features -->
-                      <tr id="core-features">
-                        <th scope="row">Core features<br><button class="expand-btn" onclick="toggleExpansion(this)">Show more ↓</button></th>
-                        <td>
-                          <div class="expandable-content">
-                            <div class="feature-list">
-                                    <div class="feature-section">
-                                        <div class="feature-category">AI Transcription</div>
-                                        <ul>
-                                            <li>AI scribe (no recordings made - converts straight to notes) - Available January 2025</li>
-                                        </ul>
-                                    </div>
-                                    <div class="section-divider"></div>
-                                    <div class="feature-section">
-                                        <div class="feature-category">Therapy Tools</div>
-                                        <ul>
-                                            <li>World's first overseen AI therapy chatbot (jAlmee)</li>
-                                            <li>Automated homework tasks (fully customisable)</li>
-                                            <li>On-demand evidence-based psychoeducation library</li>
-                                            <li>Journalling activities</li>
-                                        </ul>
-                                    </div>
-                                    <div class="section-divider"></div>
-                                    <div class="feature-section">
-                                        <div class="feature-category">Monitoring & Analytics</div>
-                                        <ul>
-                                            <li>AI algorithms detect client distress levels in real-time</li>
-                                            <li>Mood Tracking (graphed feedback for both clinician & client)</li>
-                                            <li>Real-time data collection & monitoring</li>
-                                            <li>Gamified engagement</li>
-                                        </ul>
-                                    </div>
-                                    <div class="section-divider"></div>
-                                    <div class="feature-section">
-                                        <div class="feature-category">Security & Communication</div>
-                                        <ul>
-                                            <li>Secure client-practitioner communication</li>
-                                            <li>Designed for clinician oversight</li>
-                                            <li>Privacy & data security is our number one priority!!!</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">AI Assistant</div>
-                                    <ul>
-                                        <li>AI assistant with the ease of use of ChatGPT but with AI models and features tailored for the needs of Psychologists</li>
-                                    </ul>
-                                </div>
-                                <div class="section-divider"></div>
-                                <div class="feature-section">
-                                    <div class="feature-category">Privacy & AI Models</div>
-                                    <ul>
-                                        <li>The tool allows for use with personal information (APP\Privacy Act compliant), and automatic selection of the leading AI models (e.g., OpenAI GPT-4, Google Gemini, Anthropic Claude) based on what is being asked of it</li>
-                                    </ul>
-                                </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">Session Management</div>
-                                    <ul>
-                                        <li>Creation of session data from session audio for clinical notes for in rooms or telehealth sessions</li>
-                                        <li>Creation of medical reports and letters using either the captured session data or a manual option to insert one or several sets of clinical notes</li>
-                                    </ul>
-                                </div>
-                                <div class="section-divider"></div>
-                                <div class="feature-section">
-                                    <div class="feature-category">Smart Features</div>
-                                    <ul>
-                                        <li>Smart dictate feature to allow flexible clinical admin tasks such as clinical notes, letter writing, recording phone sessions</li>
-                                    </ul>
-                                </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="expandable-content">
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">Documentation</div>
-                                    <ul>
-                                        <li>Transcription</li>
-                                        <li>Document and note generation</li>
-                                        <li>Custom templates</li>
-                                    </ul>
-                                </div>
-                                <div class="section-divider"></div>
-                                <div class="feature-section">
-                                    <div class="feature-category">Integration & Support</div>
-                                    <ul>
-                                        <li>Ask AI feature</li>
-                                        <li>Practice Management System (PMS) integrations</li>
-                                        <li>Team and enterprise infrastructure</li>
-                                        <li>Full Telehealth Support</li>
-                                        <li>Heidi Health App</li>
-                                    </ul>
-                                </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="expandable-content"></div>
-                            <div class="feature-list">
-                                <div class="feature-section">
-                                    <div class="feature-category">AI Medical Scribe</div>
-                                    <ul>
-                                        <li>AI medical scribe, Lyrebird listens to a consultation and converts it into clinical notes and documents</li>
-                                    </ul>
-                                </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                  
-                      <!-- 8. Cost of the tool -->
-                      <tr>
-                        <th scope="row">Cost of the tool<br><button class="expand-btn" onclick="toggleExpansion(this)">Show more ↓</button></th>
-                        <td><div class="expandable-content"><div class="feature-list"><ul><li>$59 per month for UNLIMITED clients, prompts, transcriptions. Includes use of FULL platform - AI transcriptions, homework tasks, customisable activities, and continuous engagement support with AI therapist chatbot, jAlmee. Discounts for clinic owners requiring multiple licences for practitioners.</li></ul></div></div></td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <ul>
-                                    <li>$20/mo - Professional: High quality psychology-tailored AI models, unlimited prompts, input documents up to 10,000 words each</li>
-                                    <li>$45/mo - Professional Plus: Enhanced features such as greater memory that supports documents up to 35,000 words each, cloud synchronizing saved prompts across multiple devices, and processing of images and graphics</li>
-                                    <li>$60/mo - Enterprise: Features designed for large enterprises, such as customizable security policies and Single-Sign-On</li>
-                                </ul>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <ul>
-                                    <li>Essential plan $29 AUD $19USD</li>
-                                    <li>Professional Plan $79 AUD $49USD</li>
-                                    <li>Code: AIPSYCH2024 (for affiliate: 10% off)</li>
-                                </ul>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <ul>
-                                    <li>Free Tier: Cost - Free. Benefits - Access to world class AI scribe with no cost. Limitations: 10 pro actions a month which can be used on custom templates, document generation or Ask Heidi</li>
-                                    <li>Pro Tier: Cost - $99 per month or $799 upfront for the year. Benefits - Unlimited usage of the Heidi platform! No limits on number of sessions or documents generated (Pro Actions). Limits: Self-Serve system where you must create your own templates or utilise community templates</li>
-                                    <li>Together Tier: Cost - $1299 for the year per user. Benefits: Team features that allow you to share templates across the team, Integration with your PMS, Full Heidi Support where the Medical Knowledge team will create templates for you! Limitations: None at all!</li>
-                                </ul>
-                            </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="expandable-content">
-                            <div class="feature-list">
-                                <ul>
-                                    <li>Standard Pricing: $300 per month OR $2,400 per year (33% discount)</li>
-                                    <li>Use code PS10 for 10% off</li>
-                                    <li>Special Discounts: Students: Free subscription for 1 year</li>
-                                    <li>Registrars: 80% off if solo, free if part of a clinic deal</li>
-                                    <li>Part-Time Pricing: More than 25 hours/week: Full price. Less than 25 hours/week: 50% discount</li>
-                                    <li>Organisation: If you are a part of a clinic wanting to join Lyrebird, we discuss a special price and organise an onboarding session</li>
-                                </ul>
-                            </div>
-                            </div>
-                        </td>
-                      </tr>
-                  
-                      <!-- 9. Headphones compatible -->
-                      <tr>
-                          <th scope="row">Headphones compatible</th>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 10. Mobile Phone compatible -->
-                      <tr>
-                          <th scope="row">Mobile Phone compatible</th>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="cross-icon">✗</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 11. Can multiple notes inform the report? -->
-                      <tr>
-                          <th scope="row">Can multiple notes inform the report?</th>
-                          <td>Not sure</td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 12. Is the AI trainable over time? -->
-                      <tr>
-                          <th scope="row">Is the AI trainable over time?</th>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td>We have a prompt review tool which we have found better than training</td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 13. Content Tuning -->
-                      <tr>
-                          <th scope="row">
-                              <div class="tooltip">
-                                  Content Tuning <span class="question-mark">?</span>
-                                  <span class="tooltiptext">Can the tool adjust its content based on feedback? (reinforcement learning)</span>
-                              </div>
-                          </th>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 14. Trusted Sources Only -->
-                      <tr>
-                          <th scope="row">
-                              <div class="tooltip">
-                                  Trusted Sources Only <span class="question-mark">?</span>
-                                  <span class="tooltiptext">Can the tool be limited to use only top quality, evidence-based sources for info, assessments, and plans?</span>
-                              </div>
-                          </th>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                          <td><span class="check-icon">✓</span></td>
-                      </tr>
-                  
-                      <!-- 15. Languages -->
-                      <tr>
-                        <th scope="row">Languages Supported<br><button class="expand-btn" onclick="toggleExpansion(this)">Show more ↓</button></th>
-                        <td><div class="expandable-content"><div class="feature-list"><ul><li>Not at this time, but will be adding languages as we go</li></ul></div></div></td>
-                        <td><div class="expandable-content"><div class="feature-list"><ul><li>English primarily supported, but content can be generated in many other languages</li></ul></div></div></td>
-                        <td><div class="expandable-content"><div class="feature-list"><ul><li>Bulgarian</li><li>Catalan</li><li>Chinese (Mandarin, Simplified)</li><li>Chinese (Mandarin, Traditional)</li><li>Chinese (Cantonese, Traditional)</li><li>Czech</li><li>Danish</li><li>Dutch</li><li>English Australian</li><li>English British</li><li>English Indian</li><li>English New Zealand</li><li>English U.S.</li><li>Estonian</li><li>Finnish</li><li>Flemish</li><li>French Canadian</li><li>French Swiss</li><li>French</li><li>German Swiss</li><li>German</li><li>Greek</li><li>Hindi</li><li>Hungarian</li><li>Indonesian</li><li>Italian</li><li>Japanese</li><li>Korean</li><li>Latvian</li><li>Lithuanian</li><li>Malay</li><li>Spanish and English</li><li>Norwegian</li><li>Polish</li><li>Portuguese Brazilian</li><li>Portuguese</li><li>Romanian</li><li>Russian</li><li>Slovak</li><li>Spanish</li><li>Swedish</li><li>Thai</li><li>Turkish</li><li>Ukrainian</li><li>Vietnamese</li></ul></div></div></td>
-                        <td><div class="expandable-content"><div class="feature-list"><ul><li>Cantonese</li><li>Czech</li><li>Danish</li><li>Dutch</li><li>Flemish</li><li>French</li><li>German</li><li>Greek</li><li>Hindi</li><li>Indonesian</li><li>Italian</li><li>Mandarin</li><li>Norwegian</li><li>Japanese</li><li>Korean</li><li>Malay</li><li>Polish</li><li>Portuguese</li><li>Russian</li><li>Spanish</li><li>Swedish</li><li>Thai</li><li>Turkish</li><li>Ukrainian</li><li>Vietnamese</li></ul></div></div></td>
-                        <td><div class="expandable-content"><div class="feature-list"><ul><li>Yes, it supports all languages</li></ul></div></div></td>
-                    </tr>
-                  </tbody>
-                  
-                </table>
-            </div>
-        </div>
-
-        <div id="table2" class="tab-content">
-            <div class="table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                 
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                        <tr>
-                          <td>
-                            <div class="tooltip">
-                                Content Tuning <span class="question-mark">?</span>
-                                <span class="tooltiptext">Can the tool adjust its content based on feedback? (reinforcement learning)</span>
-                            </div>                          
-                          </td>
-                            <td>Yes, each user can prove instructions on their preferences that the tool will abide when producing a note.</td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="tooltip">
-                                Trusted Sources Only <span class="question-mark">?</span>
-                                <span class="tooltiptext">Can the tool be limited to use only top quality, evidence-based sources for info, assessments, and plans?</span>
-                            </div>
-                          </td>
-                            <td>This can be achieved applying the user's custom preferences.</td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                    </tbody>
-                    
-                </table>
-            </div>
-        </div>
-        
-        <div id="table3" class="tab-content">
-            <div class="table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Features</th>
+                            <th>Zanda Health</th>
+                            <th>NovoNote by NovoPsych</th>
+                            <th>Uplift AI</th>
+                            <th>Everbility</th>
                             <th>Mentalyc</th>
                             <th>AllyScribe</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <th scope="row"></th>
                             <td></td>
-                            <td>
-                                <button class="see-more-btn">Order now</button>
-                            </td>
-                            <td>
-                                <button class="see-more-btn">See more</button>
-                                <div class="affiliate-note">See pricing more for discount code</div>
-                            </td>
-                        </tr>
+                          </tr>
+
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  
                         <tr>
-                            <td>           <div class="tooltip">
-                              APP Compliance<span class="question-mark">?</span>
-                              <span class="tooltiptext">Australian Privacy Principles</span>
-                          </div></td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                        <tr>
-                            <td>Free membership option?</td>
-                            <td><span class="cross-icon">✗</span></td>
-                            <td><span class="cross-icon">✗</span></td>
-                        </tr>
-                        <tr>
-                            <td>Is there a free trial?</td>
-                            <td><span class="check-icon">✓</span><br><span>7 days and 15 free notes</span></td>
-                            <td><span class="check-icon">✓</span><br><span>7 days</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Core features</strong></td>
-                            <td>
-                                <div class="feature-list">
-                                    <ul>
-                                        <li>Full documentation: intake, progress, treatment plans</li>
-                                        <li>Multiple input methods: audio, uploads, text, dictation</li>
-                                        <li>Supports individual, couple, family, and group therapy</li>
-                                        <li>EHR integration, auto CPT codes, and insurance compliance</li>
-                                        <li>Session analytics and smart, anonymised transcripts</li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="feature-list">
-                                    <ul>
-                                        <li>AI generated documentation</li>
-                                        <li>Realtime transcription</li>
-                                        <li>Regenerations and History</li>
-                                        <li>Preset and Custom Templates</li>
-                                        <li>EHR integration (Cliniko, Nookal)</li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><strong>Unique features</strong></td>
-                            <td>
-                                <div class="feature-list">
-                                    <ul>
-                                        <li>Comprehensive Client Types —child, couple, family, and Individual notes</li>
-                                        <li>Comprehensive Group Therapy Notes</li>
-                                        <li>Session Analytics</li>
-                                        <li>Customizable Templates including SOAP, DAP, BIRP, PIRP, GIRP, PIE, and SIRP</li>
-                                        <li>Supports multiple input methods: audio recordings, file uploads, dictation, and text descriptions.</li>
-                                        <li>Supports a Wide Range of Therapeutic Modalities including CBT, EMDR, Psychiatry, Psychodynamic, Humanistic-Existential and so much more</li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="feature-list">
-                                    <ul>
-                                        <li>Seamless EHR integration: From fetching appointments, to auto-saving generated notes, the end-to-end automation enables users to maximise efficiency with minimal effort.</li>
-                                        <li>Regeneration: Generate multiple documents for the same session using different templates, from notes to referrals to treatment plans.</li>
-                                        <li>Versioning: Easily keep track of multiple generated documents under one session.</li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Where is data stored?</td>
-                            <td>US</td>
-                            <td>Australia</td>
-                        </tr>
-                        <tr>
-                            <td>Headphones compatible</td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                        <tr>
-                            <td>Mobile Phone compatible</td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                        <tr>
-                            <td>Can multiple notes inform the report?</td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="cross-icon">✗</span></td>
-                        </tr>
-                        <tr>
-                            <td>          <div class="tooltip">
-                              PMS Integration <span class="question-mark">?</span>
-                              <span class="tooltiptext">Practice Management System</span>
-                          </div></td>
-                            <td>Several EHRs (specifics have not been provided)</td>
-                            <td>Cliniko, Nookal</td>
-                        </tr>
-                        <tr>
-                            <td>Languages supported</td>
-                            <td>Not yet</td>
-                            <td>The app supports many languages, please contact us if you need any help with multilingual support</td>
-                        </tr>
-                        <tr>
-                            <td>Cost of the tool?</td>
-                            <td>
-                                <div class="feature-list">
-                                    Mini - USD 14.99 /seat/month/billed annually<br>
-                                    Basic - USD 29.99 /seat/month/billed annually<br>
-                                    Pro - USD 59.99 /seat/month/billed annually<br>
-                                    Super - USD 99.99 /seat/month/billed annually<br>
-                                    <a href="https://mentalyc.com/pricing" target="_blank">Learn more - mentalyc.com/pricing</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="feature-list">
-                                    Essential. $69/month, $55pm when paid annually.<br>
-                                    <b>Use SQUARED20 --&gt; $20 off.</b><br>
-                                    Premium. $99/month, $79pm when paid annually.<br>
-                                    <b>Use SQUARED30 --&gt; $30 off.</b><br>
-                                    For more information, please refer to: <a href="https://allyscribe.com.au/" target="_blank">https://allyscribe.com.au/</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Is the AI trainable over time?</td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="tooltip">
-                                Content Tuning <span class="question-mark">?</span>
-                                <span class="tooltiptext">Can the tool adjust its content based on feedback? (reinforcement learning)</span>
-                            </div>                          
-                          </td>
-                            <td><span class="cross-icon">✗</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="tooltip">
-                                Trusted Sources Only <span class="question-mark">?</span>
-                                <span class="tooltiptext">Can the tool be limited to use only top quality, evidence-based sources for info, assessments, and plans?</span>
-                            </div>
-                          </td>
-                            <td><span class="check-icon">✓</span></td>
-                            <td><span class="check-icon">✓</span></td>
-                        </tr>
-                    </tbody>
-                    
-                </table>
-            </div>
-        </div>
-        
-    </div>
+                            <th scope="row"></th>
+                            <td></td>
+                          </tr>
+                  
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                      </tr>
+                  </tbody>
+                  
+                </table>  
 
     <script>
-        function switchTab(tabId) {
-            // Hide all tab contents
-            const allTabs = document.querySelectorAll('.tab-content');
-            allTabs.forEach(tab => tab.classList.remove('active'));
-            
-            // Remove active class from all buttons
-            const allButtons = document.querySelectorAll('.tab-button');
-            allButtons.forEach(button => button.classList.remove('active'));
-            
-            // Show selected tab
-            document.getElementById(tabId).classList.add('active');
-            
-            // Highlight selected button
-            event.target.classList.add('active');
-        }
 
         function toggleExpansion(button) {
           const row = button.closest('tr');
