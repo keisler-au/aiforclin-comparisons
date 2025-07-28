@@ -54,7 +54,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
-    min-width: 1800px; /* ADDED */
+    min-width: 1000px; /* ADDED */
 }
 
         .comparison-table th {
@@ -383,6 +383,24 @@
 </head>
 <body>
   <div class="table-container">
+  <!-- Column Toggle Dropdown -->
+  <div style="margin-bottom: 16px; position: relative;">
+    <button id="columnDropdownBtn" style="padding: 8px 16px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer;">Show/Hide Companies ▼</button>
+    <div id="columnDropdown" style="display:none; position:absolute; z-index:100; background:#fff; border:1px solid #ccc; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:12px; min-width:220px; max-height:300px; overflow-y:auto;">
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="1" checked> ANTSA</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="2" checked> Bastion GPT</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="3" checked> Patient Notes</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="4" checked> Heidi Health</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="5" checked> Lyrebird</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="6" checked> Zanda Health</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="7" checked> NovoNote by NovoPsych</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="8" checked> Uplift AI</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="9" checked> Everbility</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="10" checked> Mentalyc</label>
+      <label style="display:block; margin-bottom:4px;"><input type="checkbox" class="column-toggle" data-col="11" checked> AllyScribe</label>
+    </div>
+  </div>
+
   <button class="scroll-button scroll-left" onclick="scrollTable('left')" id="scrollLeft">
     ‹
 </button>
@@ -1193,6 +1211,50 @@
 
         window.addEventListener("load", sendHeight);
         window.addEventListener("resize", sendHeight);
+
+    // --- COLUMN TOGGLE DROPDOWN LOGIC ---
+    const dropdownBtn = document.getElementById('columnDropdownBtn');
+    const dropdown = document.getElementById('columnDropdown');
+    dropdownBtn.addEventListener('click', function(e) {
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      e.stopPropagation();
+    });
+    document.addEventListener('click', function(e) {
+      if (dropdown.style.display === 'block') dropdown.style.display = 'none';
+    });
+    dropdown.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    function setColumnVisibility(colIdx, visible) {
+      const table = document.getElementById('tableId');
+      if (!table) return;
+      // th
+      const ths = table.querySelectorAll('thead tr th');
+      if (ths[colIdx]) ths[colIdx].style.display = visible ? '' : 'none';
+      // all rows
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td, th');
+        if (cells[colIdx]) cells[colIdx].style.display = visible ? '' : 'none';
+      });
+    }
+
+    // Initial setup: all checked
+    const toggles = document.querySelectorAll('.column-toggle');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('change', function() {
+        const col = parseInt(this.getAttribute('data-col'));
+        setColumnVisibility(col, this.checked);
+      });
+    });
+
+    // Utility: on load, ensure all columns visible
+    toggles.forEach(toggle => {
+      const col = parseInt(toggle.getAttribute('data-col'));
+      setColumnVisibility(col, toggle.checked);
+    });
+    // --- END COLUMN TOGGLE ---
     </script>
 </body>
 </html>
