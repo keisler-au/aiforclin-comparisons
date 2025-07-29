@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BastionGPT - AI Assistant for Psychologists</title>
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>        
+        :root {
+            --primary-gold: #D4AF37;
+            --gold-light: #F4E4BC;
+            --gold-dark: #B8941F;
+            --navy-dark: #1A2B44;
+            --navy-darker: #14223A;
+            --navy-deepest: #0F1A2E;
+            --text-primary: #D4AF37;
+            --text-secondary: #F4E4BC;
+            --text-muted: #C4B078;
+            --border-color: rgba(212, 175, 55, 0.3);
+            --hover-bg: rgba(212, 175, 55, 0.15);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,275 +29,532 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, var(--navy-deepest) 0%, var(--navy-darker) 50%, var(--navy-dark) 100%);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px;
             line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 20px;
         }
 
         .header {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 3.75rem;
         }
 
         .header h1 {
-            color: #667eea;
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--primary-gold);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.05em;
+            line-height: 1.2;
         }
 
         .header p {
-            color: #666;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 2rem;
         }
 
         .nav-buttons {
             display: flex;
-            gap: 20px;
+            gap: 1.25rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .nav-button {
-            background: #667eea;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
+            display: inline-block;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            background: rgba(212, 175, 55, 0.08);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.25rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Lora', serif;
+            letter-spacing: 0.025em;
         }
 
-        .nav-button:hover {
-            background: #5a6fd8;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s ease;
+            pointer-events: none;
+        }
+
+        .nav-button:hover::before,
+        .nav-button:focus::before {
+            left: 100%;
+        }
+
+        .nav-button:hover,
+        .nav-button:focus {
+            background: var(--hover-bg);
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+            outline: none;
+            color: var(--gold-light);
         }
 
         .nav-button.secondary {
-            background: #764ba2;
+            background: rgba(212, 175, 55, 0.12);
+            border-color: var(--gold-dark);
         }
 
-        .nav-button.secondary:hover {
-            background: #6a4190;
+        .nav-button.secondary:hover,
+        .nav-button.secondary:focus {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
         }
 
         .content {
-            background: white;
-            border-radius: 20px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            transition: left 0.8s ease;
+            pointer-events: none;
+        }
+
+        .content:hover::before {
+            left: 100%;
+        }
+
+        .content:hover {
+            background: var(--hover-bg);
+            border-color: var(--primary-gold);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
         }
 
         .section h2 {
-            color: #667eea;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid var(--primary-gold);
+            padding-bottom: 0.5rem;
+            letter-spacing: 0.025em;
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .info-card {
-            background: #f8f9ff;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-gold);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+
+        .info-card:hover::before {
+            left: 100%;
+        }
+
+        .info-card:hover {
+            background: rgba(212, 175, 55, 0.18);
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12);
         }
 
         .info-card h3 {
-            color: #667eea;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            color: var(--primary-gold);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .info-card p, .info-card ul {
-            color: #666;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
         }
 
         .info-card ul {
-            padding-left: 20px;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .info-card li {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card strong {
+            color: var(--primary-gold);
+            font-weight: 700;
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            gap: 1.5rem;
+            margin-top: 1.25rem;
         }
 
         .pricing-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: var(--transition);
             position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+
+        .pricing-card:hover::before {
+            left: 100%;
         }
 
         .pricing-card:hover {
-            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.22);
+            border-color: var(--primary-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
         }
 
         .pricing-card.popular {
-            border: 3px solid #ffd700;
-            transform: scale(1.05);
+            border: 3px solid var(--primary-gold);
+            background: rgba(212, 175, 55, 0.2);
+            transform: scale(1.02);
         }
 
-        .pricing-card.popular::before {
+        .pricing-card.popular::after {
             content: "Most Popular";
             position: absolute;
-            top: -10px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: #ffd700;
-            color: #333;
-            padding: 5px 15px;
-            border-radius: 15px;
+            background: var(--primary-gold);
+            color: var(--navy-deepest);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 700;
+            z-index: 2;
         }
 
         .pricing-card h4 {
+            color: var(--primary-gold);
             font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
         }
 
         .pricing-card .price {
+            color: var(--gold-light);
             font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .pricing-card .features {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
             line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
 
         .feature-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            gap: 1.25rem;
+            margin-top: 1.25rem;
         }
 
         .feature-item {
-            background: #f0f4ff;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            border-left: 4px solid var(--primary-gold);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+
+        .feature-item:hover::before {
+            left: 100%;
+        }
+
+        .feature-item:hover {
+            background: rgba(212, 175, 55, 0.16);
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12);
         }
 
         .feature-item h4 {
-            color: #667eea;
-            margin-bottom: 10px;
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
         }
 
         .feature-item p {
-            color: #666;
-            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box {
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--primary-gold);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.25rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.8s ease;
+            pointer-events: none;
+        }
+
+        .highlight-box:hover::before {
+            left: 100%;
+        }
+
+        .highlight-box h3 {
+            color: var(--primary-gold);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        .highlight-box a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(244, 228, 188, 0.3);
+            transition: var(--transition);
+        }
+
+        .highlight-box a:hover {
+            border-color: var(--gold-light);
+            color: var(--primary-gold);
+        }
+
+        .contact-info {
+            background: rgba(212, 175, 55, 0.15);
+            border: 2px solid var(--primary-gold);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.8s ease;
+            pointer-events: none;
+        }
+
+        .contact-info:hover::before {
+            left: 100%;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info strong {
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        .contact-info a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(244, 228, 188, 0.3);
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            border-color: var(--gold-light);
+            color: var(--primary-gold);
         }
 
         .status-badge {
             display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
             font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 10px;
+            font-weight: 700;
+            margin-left: 0.5rem;
         }
 
         .status-yes {
-            background: #d4edda;
-            color: #155724;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--primary-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .status-no {
-            background: #f8d7da;
-            color: #721c24;
+            background: rgba(184, 148, 31, 0.2);
+            color: var(--gold-dark);
+            border: 1px solid rgba(184, 148, 31, 0.3);
         }
 
         .status-partial {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .contact-info {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .contact-info h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .contact-info a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid rgba(255,255,255,0.3);
-            transition: border-color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            border-color: white;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .highlight-box h3 {
-            margin-bottom: 10px;
+            background: rgba(196, 176, 120, 0.2);
+            color: var(--text-muted);
+            border: 1px solid rgba(196, 176, 120, 0.3);
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -288,36 +562,106 @@
             }
         }
 
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
         @media (max-width: 768px) {
+            .container {
+                padding: 1.875rem 0.9375rem;
+            }
+
             .header h1 {
-                font-size: 2rem;
+                font-size: clamp(2rem, 6vw, 2.5rem);
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 1.25rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .info-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .info-card p, .info-card li {
+                font-size: 1rem;
             }
             
             .nav-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 0.9375rem;
             }
-            
+
+            .nav-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+
             .info-grid, .pricing-grid, .feature-list {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-card ul {
+                margin-left: 1rem;
+            }
+
+            .nav-button {
+                padding: 0.875rem 1.25rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        @media (prefers-contrast: high) {
+            .content,
+            .info-card,
+            .pricing-card,
+            .feature-item,
+            .highlight-box,
+            .contact-info,
+            .nav-button {
+                border-width: 3px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header class="header">
             <h1>BastionGPT</h1>
             <p>AI Assistant Tailored for Psychologists</p>
             
-            <div class="nav-buttons">
-                <a href="index.html" class="nav-button">← Back to Comparison</a>
-                <a href="https://bastiongpt.com" class="nav-button secondary">Visit BastionGPT Website</a>
-            </div>
-        </div>
+            <nav class="nav-buttons" aria-label="Navigation links">
+                <a href="index.html" class="nav-button" aria-label="Return to comparison page">← Back to Comparison</a>
+                <a href="https://bastiongpt.com" class="nav-button secondary" target="_blank" rel="noopener noreferrer" aria-label="Visit BastionGPT website">Visit BastionGPT Website</a>
+            </nav>
+        </header>
 
-        <div class="content">
-            <div class="section">
+        <article class="content">
+            <section class="section">
                 <h2>Company Overview</h2>
                 <div class="info-grid">
                     <div class="info-card">
@@ -341,15 +685,16 @@
                         <p><strong>Free Level:</strong> Available</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <div class="highlight-box">
                 <h3>🎯 Psychology Squared Special Offer</h3>
                 <p><strong>30-day free trial available through Psychology Squared promotion!</strong></p>
-                <p>Affiliate link: <a href="https://bit.ly/psbasgpt" style="color: #ffd700;">https://bit.ly/psbasgpt</a></p>
+                <p>Affiliate link: <a href="https://bit.ly/psbasgpt">https://bit.ly/psbasgpt</a></p>
             </div>
-
-            <div class="section">
+            </article>
+            <article class="content">
+            <section class="section">
                 <h2>Core Features</h2>
                 <div class="feature-list">
                     <div class="feature-item">
@@ -377,9 +722,10 @@
                         <p>Keep track of all your conversations with powerful search functionality</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="section">
+            </section>
+            </article>
+            <article class="content">
+            <section class="section">
                 <h2>Unique Value Proposition</h2>
                 <div class="info-card">
                     <h3>Specialized for Psychology Practice</h3>
@@ -400,9 +746,10 @@
                         <p>Stay current with cutting-edge AI technology through one subscription</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="section">
+            </section>
+            </article>
+            <article class="content">
+            <section class="section">
                 <h2>Technical Specifications</h2>
                 <div class="info-grid">
                     <div class="info-card">
@@ -426,9 +773,10 @@
                         <p>Content generation available in many other languages</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="section">
+            </section>
+            </article>
+            <article class="content">
+            <section class="section">
                 <h2>AI Capabilities</h2>
                 <div class="info-grid">
                     <div class="info-card">
@@ -446,9 +794,10 @@
                         <p>Customizable security policies (Enterprise)</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="section">
+            </section>
+            </article>
+            <article class="content">
+            <section class="section">
                 <h2>Pricing & Plans</h2>
                 
                 <div class="pricing-grid">
@@ -482,9 +831,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+            </article>
 
-            <div class="section">
+            <article class="content">
+            <section class="section">
                 <h2>User Experience</h2>
                 <div class="info-card">
                     <h3>Designed with Psychologist Feedback</h3>
@@ -505,8 +856,8 @@
                         <p>Models tuned for energy efficiency where quality isn't compromised</p>
                     </div>
                 </div>
-            </div>
-
+            </section>
+            </article>
             <div class="contact-info">
                 <h3>Contact Information</h3>
                 <p><strong>Website:</strong> <a href="https://bastiongpt.com">bastiongpt.com</a></p>
@@ -514,8 +865,87 @@
                 <p><strong>Support:</strong> Josh Spencer in Psychology Squared Facebook group</p>
                 <p><strong>30-Day Trial:</strong> <a href="https://bit.ly/psbasgpt">https://bit.ly/psbasgpt</a></p>
             </div>
-        </div>
+ 
     </div>
-</body>
-</html>
 
+    <script>
+        'use strict';
+        
+        const animateElements = () => {
+            const elements = document.querySelectorAll('.header, .content');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        element.classList.add('fade-in');
+                        element.style.opacity = '';
+                        element.style.transform = '';
+                    }, index * 150);
+                });
+            });
+        };
+
+        const addRippleEffect = (button, event) => {
+            const ripple = document.createElement('div');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            Object.assign(ripple.style, {
+                position: 'absolute',
+                borderRadius: '50%',
+                background: 'rgba(212, 175, 55, 0.6)',
+                transform: 'scale(0)',
+                animation: 'ripple 0.6s linear',
+                left: x + 'px',
+                top: y + 'px',
+                width: size + 'px',
+                height: size + 'px',
+                pointerEvents: 'none'
+            });
+            
+            button.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        };
+
+        const handleKeyNavigation = (event) => {
+            const navButtons = Array.from(document.querySelectorAll('.nav-button'));
+            const currentIndex = navButtons.indexOf(document.activeElement);
+            
+            switch(event.key) {
+                case 'ArrowLeft':
+                    if (currentIndex > 0) {
+                        event.preventDefault();
+                        navButtons[currentIndex - 1].focus();
+                    }
+                    break;
+                case 'ArrowRight':
+                    if (currentIndex < navButtons.length - 1) {
+                        event.preventDefault();
+                        navButtons[currentIndex + 1].focus();
+                    }
+                    break;
+                case 'Enter':
+                case ' ':
+                    if (document.activeElement.classList.contains('nav-button')) {
+                        event.preventDefault();
+                        document.activeElement.click();
+                    }
+                    break;
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            animateElements();
+            
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(button => {
+                button.addEventListener('click', (e) => addRippleEffect(button, e), { passive: true });
+            });
+            
+            document.addEventListener('keydown', handleKeyNavigation);
+        });
+    </script>
